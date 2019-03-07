@@ -1,0 +1,23 @@
+//- ------------------------------------
+//- head
+//-
+mixin style(path)
+  link(rel="stylesheet" href=path)&attributes(attributes)
+
+mixin styleSp(path)
+  +style(path)(media="screen and (max-width: 767px)")
+
+mixin absoluteStyle(path)
+  link(rel="stylesheet" href=path)&attributes(attributes)
+
+mixin absoluteStyleSp(path)
+  +absoluteStyle(path)(media="screen and (max-width: 767px)")
+
+mixin script(path)
+  script(src=path)&attributes(attributes)
+
+mixin absoluteScript(path)
+  script(src=path defer)&attributes(attributes)
+
+mixin googlemapsScript
+  +absoluteScript('https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBUXbtbBgKVm5TtIeDQELqsXc9By9bLLFM')
