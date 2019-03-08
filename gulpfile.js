@@ -16,6 +16,8 @@ const autoprefixer = require("autoprefixer");
 const postcss = require("gulp-postcss"); // ...
 const cssnano = require("cssnano"); // minify css
 const rename = require("gulp-rename"); // rename file
+const sourcemaps = require("gulp-sourcemaps"); // sourcemap
+const gulpIf = require("gulp-if"); // gulpIf
 
 const optionCSS = {
   browsers: [
@@ -29,7 +31,8 @@ const optionCSS = {
  */
 const paths = {
   public: './public/',
-  src: './src/'
+  src: './src/',
+  fonts: './public/fonts/'
 };
 
 const config = {
@@ -51,6 +54,10 @@ function browser_sync(done) {
   browserSync.init({
     server: {
       baseDir: paths.public
+    },
+    open: false,
+    watchOptions: {
+      debounceDelay: 1000    // Wait one second before refreshing.
     }
   });
   done();
@@ -73,7 +80,7 @@ function clean() {
 function vendors() {
   for (var i = 0; i < config.vendorNotMinified.src.length; i++)
     gulp.src(config.vendorNotMinified.src[i])
-    .pipe(gulp.dest(paths.vendor));
+    .pipe(gulp.dest('./src/vendor/'));
 
   return gulp.src(config.vendorNotMinified.src);
 };
@@ -85,6 +92,7 @@ function vendors() {
 function images() {
   return gulp
     .src(['./src/**/*.+(png|jpg|jpeg|gif|svg|ico)'])
+    // Caching images that ran through imagemin
     .pipe(cache(imagemin([
       imagemin.gifsicle({
         interlaced: true
@@ -94,7 +102,7 @@ function images() {
         optimizationLevel: 5
       }),
       imagemin.optipng({
-        optimizationLevel: 9
+        optimizationLevel: 8
       }),
       imagemin.svgo({
         plugins: [{
@@ -123,7 +131,7 @@ function images() {
 
 /**
  * Compile .pug files and pass in data from json file
- * matching file name. index.pug - index.pug.json
+ * matching file . index.pug - index.pug.json
  */
 function jade() {
   return gulp
@@ -140,18 +148,36 @@ function jade() {
     .pipe(browserSync.stream())
 };
 
+
 /**
  * Compile .scss files into public css directory With autoprefixer no
  * need for vendor prefixes then live reload the browser.
  */
 function css() {
   return gulp
-    .src(['./src/**/*.scss', './src/**/*.css'])
+    .src(['./src/**/*.{scss,sass}', './src/**/*.css'])
     .pipe(plumber())
-    .pipe(sass({ outputStyle: "expanded" }))
+    .pipe(sourcemaps.init())
+    // Compile Sass using LibSass.
+    .pipe(sass({
+      outputStyle: "expanded",
+      errLogToConsole: true, // Log errors.
+    }))
     // .pipe(gulp.dest(paths.public))
     // .pipe(rename({ suffix: ".min" }))
+    .pipe(rename(function (path) {
+      function removeLastDirectory (curPath) {
+        var curPath = path.dirname.split('/');
+        curPath.pop();
+        return(curPath.join('/'));
+      }
+      var newPath = removeLastDirectory(path.dirname);
+      path.dirname = newPath+ "/css/"
+    }))
+    // Parse with PostCSS plugins.
     .pipe(postcss([autoprefixer(optionCSS), cssnano()]))
+    // Create sourcemap.
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.public))
     .pipe(browserSync.stream());
 };
@@ -165,12 +191,14 @@ function html() {
 };
 
 function js() {
-  return gulp.src(['./src/**/*.js', '!./src/vendor/*.js'])
+  return gulp.src(['./src/**/*.js', '!./src/vendor/*.js', '!./src/_js/*.js'])
     .pipe(plumber())
+    .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['@babel/env']
     }))
-    .pipe(uglify())
+    .pipe(gulpIf('!**/*.min.js', uglify({mangle: false})))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.public))
     .pipe(browserSync.stream())
 };
@@ -180,14 +208,21 @@ function js() {
  * Watch .pug files run pug-rebuild then reload BrowserSync
  */
 function watchFiles() {
-  gulp.watch(['./src/**/*.scss', './src/**/*.css'], css);
-  gulp.watch(['./src/**/*.+(png|jpg|jpeg|gif|svg|ico)'], images);
-  gulp.watch('./src/**/*.js', js);
   gulp.watch('./src/**/*.html', html);
   gulp.watch('./src/**/*.pug', jade);
+  gulp.watch(['./src/**/*.{scss,sass}', './src/**/*.css'], css);
+  gulp.watch('./src/**/*.js', js);
+  gulp.watch(['./src/**/*.+(png|jpg|jpeg|gif|svg|ico)'], images);
+  gulp.watch(['./src/fonts/**/*.+(eot|ttf|woff|woff2|svg)'], fonts);
   gulp.series(browserSyncReload)
 };
 
+
+function fonts() {
+  return gulp.src(['./src/fonts/**/*.+(eot|ttf|woff|woff2|svg)'])
+    .pipe(gulp.dest(paths.fonts))
+    .pipe(browserSync.stream())
+}
 /**
  * Default task, running just `gulp` will compile the sass,
  * compile the jekyll site, launch BrowserSync then watch
@@ -195,7 +230,7 @@ function watchFiles() {
  */
 
 
-const build = gulp.series(clean, gulp.parallel(vendors, jade, css, images, js, html));
+const build = gulp.series(clean, gulp.parallel(vendors, jade, css, images, js, html, fonts));
 const watch = gulp.parallel(watchFiles, browser_sync);
 
 exports.vendors = vendors;
@@ -204,6 +239,7 @@ exports.css = css;
 exports.images = images;
 exports.clean = clean;
 exports.html = html;
+exports.fonts = fonts;
 exports.js = js;
 exports.build = build;
 exports.watch = watch;
