@@ -1,0 +1,56 @@
+mixin quickpay_list
+  .quickpay-page
+    h2.quickpay-title Chọn nguồn tiền
+    .quickpay-wallet-list
+      ul.clearfix
+        li.active
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/zalopay.png')
+            .info
+              .info-inside
+                p.name Ví ZaloPay
+                p.num Số dư: 50.000đ
+        li
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/vietinbank.png')
+            .info
+              .info-inside
+                p.name ViettinBank
+                p.num **** 2011
+        li
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/eximbank.png')
+            .info
+              .info-inside
+                p.name Eximbank
+                p.num **** 2345
+        li
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/vietcombank.png')
+            .info
+              .info-inside
+                p.name Vietcombank
+                p.num **** 5467
+    h2.quickpay-title Thanh toán tối đa
+    .money-list
+      ul
+        li.active
+          a(href='javascript:void(0);')
+            | 200.000đ
+        li
+          a(href='javascript:void(0);')
+            | 500.000đ
+        li
+          a(href='javascript:void(0);')
+            | 1.000.000đ
+        li
+          a(href='javascript:void(0);')
+            | 2.000.000đ
+    .btn-row
+      a.btn-style.blue(href='javascript:void(0);') Cập nhật
+    .lnk-row
+      a.lnk-style(href='javascript:void(0);') Bỏ qua

@@ -1,0 +1,35 @@
+mixin footer
+  ul.footer_list
+    each item in list
+      li.footer_list_item(class={'active' : item.font})
+        a(href=item.link target="_blank").footer_list_item_anchor=item.text
+    
+-
+  const list = [
+    {
+      text: 'Menu 1',
+      link: 'https://www.google.com',
+      font: true
+    },
+    {
+      text: 'Menu 2',
+      link: 'https://www.youtube.com'
+    },
+    {
+      text: 'Menu 3',
+      link: 'https://www.vng.com.vn'
+    },
+  ]
+
+html
+  head
+    link(rel="stylesheet", href="css/index.css")
+    //- script(src="./js/bundle.js")
+    script(src="./js/vendor/jquery-3.1.1.min.js")
+    script(src="./js/index.js")
+    
+  body
+    h1.title THIS IS CONTENT
+  footer
+    +footer(list)
+    

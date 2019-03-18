@@ -1,0 +1,48 @@
+mixin bank_mapping_2_4_popup_error
+  .popup-style-3
+    .notify-block
+      a.close-btn(href='javascript:void(0);')
+      p.txt Thẻ này chưa được hỗ trợ
+  // End popup
+  .bank-mapping-page.add-card
+    .card-num
+      p.logo
+        img(src='images/bank/icons/vietinbank.png')
+      p.logo-name VietinBank
+    .frm-block
+      .bank-frm-txt
+        a.delete-btn(href='javascript:void(0);')
+        input(type='text', required='', value='1234 6475 4897')
+        span.highlight
+        label Số thẻ
+      .bank-frm-txt
+        a.delete-btn(href='javascript:void(0);')
+        input(type='text', required='', value='20/08')
+        span.highlight
+        label Ngày phát hành (mm/yy)
+      .bank-frm-txt
+        a.delete-btn(href='javascript:void(0);')
+        input(type='text', required='', value='NGUYEN THANH PHUONG')
+        span.highlight
+        label Tên chủ thẻ
+    .btn-row
+      a.btn-style.blue(href='javascript:void(0);') XÁC NHẬN
+    .foot-notify
+      p.txt Đáp ứng các yêu cầu sau để liên kết thẻ thành công.
+      .txt-list
+        ul
+          li
+            p
+              | Đã đăng kí tính năng 
+              strong thanh toán trực tuyến
+              | .
+          li
+            p
+              | Số dư trong thẻ phải 
+              strong > 50.000đ
+          li
+            p
+              | Số điện thoại đăng kí tại 
+              strong  VietinBank
+              |  phải là 
+              strong  0904563483

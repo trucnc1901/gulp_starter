@@ -1,0 +1,60 @@
+//- ------------------------------------
+//- Document Type Definition
+//-
+doctype html
+
+//- ------------------------------------
+//- include local variables
+//-
+block variables
+
+//- ------------------------------------
+//- mixins
+//-
+include /_pug/_mixins/_mixins
+
+
+//- ------------------------------------
+//- components 
+//-
+include /_pug/_components/_list/_history_exchange_list
+include /_pug/_components/_list/_bank_mapping
+include /_pug/_components/_list/_billing_list
+include /_pug/_components/_list/_money_transfer
+include /_pug/_components/_list/_billing_electric
+include /_pug/_components/_list/_quickpay_list
+include /_pug/_components/_list/_sender_list_bank
+include /_pug/_components/_list/_money_transfer_list
+include /_pug/_components/_list/_user_choosed_list
+
+include /_pug/_components/_other/_topup_1_3_history_choose_user
+include /_pug/_components/_other/_money_transfer_04_3_bank_history_list
+include /_pug/_components/_other/_scan_qr_02_1_qr_code
+include /_pug/_components/_other/_billing_5_2_wallet
+
+
+include /_pug/_components/_popup/_bank_mapping_1_3_popup_notify
+include /_pug/_components/_popup/_bank_mapping_1_1_add_card_grid_popup
+include /_pug/_components/_popup/_bank_mapping_2_4_popup_error
+include /_pug/_components/_popup/_topup_7_1_gift_popup
+include /_pug/_components/_popup/_quickpay_1_3_popup
+include /_pug/_components/_popup/_billing_5_3_wallet_popup
+include /_pug/_components/_popup/_voucher_0_new_voucher_popup
+include /_pug/_components/_popup/_event_spring_popup
+include /_pug/_components/_popup/_receiver_3_1_gift_popup_s2
+
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no')
+    title
+    
+    block styles
+
+    +absoluteScript('//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js')
+    block scripts
+  
+  //- body(style=(BODY_OVERFLOW ? 'overflow: hidden' : ''))
+  body
+    block content

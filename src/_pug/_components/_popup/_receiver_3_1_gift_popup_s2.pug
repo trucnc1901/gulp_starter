@@ -1,0 +1,66 @@
+mixin receiver_3_1_gift_popup_s2
+  .popup-page
+    .popup-box
+      a.close-btn(href='javascript:void(0);')
+      .gift-popup
+        p.gift-img
+          img(src='images/event/gift_img.png', alt='')
+        p.txt2 Bạn sẽ nhận ngay voucher
+        .gift-value
+          .inside.clearfix
+            p.num3
+              | Giảm 
+              span.num 50
+              span.percent %
+            p.num4 tối đa 50.000đ
+        .guide-list
+          h2 Khi thực hiện các bước sau
+          ul
+            li Bước 1: Tải ứng dụng ZaloPay
+            li Bước 2: Liên kết thẻ/tài khoản ngân hàng lần đầu với ZaloPay
+        .gift-footer
+          p.btn-row
+            a.use-btn(href='javascript:void(0);') Tải Ứng dụng
+          p.txt
+            | Chi tiết xem tại mục 
+            a(href='#') Ưu Đãi/Fanpage ZaloPay
+  // end popup
+  .sender-page.status-page
+    .detail-block
+      .info
+        p.status.done
+          span.ico
+          span.txt Hoàn tất
+        p.money
+          span.num 10.000
+          span.unit đ
+        p.note
+          | Giao dịch hoàn tất
+          br
+          | bạn đã nhận được số tiền vào ví.
+        a.money-seemore(href='javascript:void(0);') XEM SỐ DƯ TÀI KHOẢN
+      .receiver-info.clearfix
+        p.avatar
+          img(src='images/landing/img4.jpg')
+        .info
+          .row
+            .col
+              p.name Dat VT
+              p.who Người gửi
+      .transition-list.mess
+        ul
+          li
+            p.lb Lời nhắn
+            p.txt Trả tiền cafe sáng
+      .transition-list
+        ul
+          li
+            p.lb Thời gian gửi
+            p.txt 06-08-2018 10:20
+          li
+            p.lb Thời gian nhận
+            p.txt 07-08-2018 10:20
+          li
+            p.lb Mã giao dịch
+            p.txt 1242124523
+  script(type='text/javascript', src='js/stretchy.js')

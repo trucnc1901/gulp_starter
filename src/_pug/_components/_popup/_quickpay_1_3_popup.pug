@@ -1,0 +1,25 @@
+mixin quickpay_1_3_popup
+  .popup-done
+    .box
+      p.ico.done
+      p.txt Đã cập nhật
+  // End popup
+  .quickpay-page
+    .qr-code-box
+      p.barcode
+        img(src='images/demo/barcode.png', alt='')
+      .qr-code-img
+        .qr-code-inside
+          p.avatar
+            img(src='images/landing/img1.jpg', alt='')
+          p.img
+            img(src='images/demo/qr_code.png', alt='')
+      p.note
+        | Tự động cập nhật sau 
+        strong 00:40
+      .note-box
+        a(href='javascript:void(0);')
+          p.txt Nguồn tiền Ví ZaloPay
+          p.txt Thanh toán tối đa 200.000đ/ giao dịch
+    .lnk-row
+      a.lnk-style(href='javascript:void(0);') Quay lại ví

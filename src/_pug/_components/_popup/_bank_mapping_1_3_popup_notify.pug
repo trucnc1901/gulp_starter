@@ -1,0 +1,102 @@
+mixin bank_mapping_1_3_popup_notify
+  .popup-style
+    .popup-wrap
+      .popup-box
+        .box
+          h2.title Thông báo
+          .txt.add-card
+            | BIDV đang bảo trì, vui lòng chọn ngân hàng khác hoặc quay lại sau.
+          .btn-row
+            a.btn-style-pop.blue(href='javascript:void(0);') Đóng
+  // end popup
+  .bank-mapping-page.list-card
+    .title-row.top
+      h2.title Chọn ngân hàng
+      p.note-title Miễn phí nạp tiền, thanh toán nhanh và dễ dàng
+    .cards-list.add-card
+      ul.clearfix
+        li
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/vietinbank.png')
+            .info
+              .info-inside
+                p.name ViettinBank
+        li
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/vietcombank.png')
+            .info
+              .info-inside
+                p.name VietcomBank
+        li.inactive
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/bidv.png')
+            .info
+              .info-inside
+                p.name BIDV
+                p.txt Đang bảo trì
+        li
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/sacombank.png')
+            .info
+              .info-inside
+                p.name SacomBank
+        li
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/scb.png')
+            .info
+              .info-inside
+                p.name SCB
+        li
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/eximbank.png')
+            .info
+              .info-inside
+                p.name EximBank
+        li
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/vietcapital.png')
+            .info
+              .info-inside
+                p.name Viet Capital
+    .title-row
+      h2.title Chọn thẻ quốc tế
+      p.note-title Miễn phí nạp tiền, thanh toán nhanh và dễ dàng
+    .cards-list.add-card
+      ul.clearfix
+        li.inactive
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/visa.png')
+            .info
+              .info-inside
+                p.name Visa
+                p.txt  Chưa hỗ trợ
+        li.inactive
+          a(href='javascript:void(0);')
+            p.ico
+              img(src='images/bank/icons/master_1.2.png')
+            .info
+              .info-inside
+                p.name Mastercard
+                p.txt  Chưa hỗ trợ
+    .benefit-block
+      h2.b-title
+        span.txt Lợi ích khi liên kết
+      .txt-list
+        ul
+          li Miễn phí nạp tiền vào ZaloPay
+          li Không phải nhập lại thông tin tài khoản khi thanh toán
+          li Miễn phí rút tiền từ ZaloPay về tài khoản ngân hàng bất  cứ lúc nào
+          li Tự động định danh để tăng hạn mức giao dịch lên tối đa (20 triệu VND/ ngày)
+    .note
+      p.inside
+        | ZaloPay thực hiện theo tiêu chuẩn bảo mật
+        br
+        | PCI-DSS và không lưu thông tin thẻ của bạn
