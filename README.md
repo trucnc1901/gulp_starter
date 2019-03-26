@@ -13,7 +13,7 @@ v10.15.3 or more is required.
 Command Prompt (Terminal)  Node
 ```sh
 $ node -v
-v6.9.1
+v10.15.3
 ```
 
 ### 3. Install Node packages
@@ -29,7 +29,7 @@ $ npm install
 $ npm run dev
 ```
 
-### 4. Run build for Product
+### 5. Run build for Product
 
 ```sh
 $ npm run build
