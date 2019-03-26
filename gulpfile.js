@@ -82,10 +82,9 @@ function images() {
       }),
       imagemin.jpegtran({
         progressive: true,
-        optimizationLevel: 5
       }),
       imagemin.optipng({
-        optimizationLevel: 8
+        optimizationLevel: 5
       }),
       imagemin.svgo({
         plugins: [{
@@ -129,6 +128,7 @@ function jade() {
         console.log(`【column】${error.columnNumber}`)
         console.log(`【message】${error.message}`)
         console.log('')
+        this.emit('end');
       }
     }))
     .pipe(gulpIf('!**/*.html', pug({
@@ -166,6 +166,7 @@ function css() {
         console.log(`【column】${error.columnNumber}`)
         console.log(`【message】${error.message}`)
         console.log('')
+        this.emit('end');
       }
     }))
     .pipe(sourcemaps.init())
@@ -200,6 +201,7 @@ function js() {
         console.log(`【column】${error.columnNumber}`)
         console.log(`【message】${error.message}`)
         console.log('')
+        this.emit('end');
       }
     }))
     .pipe(sourcemaps.init())
@@ -248,12 +250,18 @@ function js() {
     .pipe(browserSync.stream())
 };
 
+function scss() {
+  return gulp.src(['./src/sass/**/*.{scss,sass,css}'])
+    .pipe(gulp.dest(CONFIG.path.dist + "/sass"))
+    .pipe(browserSync.stream())
+}
 
 function fonts() {
   return gulp.src('./src/**/fonts/*.+(eot|ttf|woff|woff2|svg)')
     .pipe(gulp.dest(CONFIG.path.dist))
     .pipe(browserSync.stream())
 }
+
 
 /**
  * Watch scss files for changes & recompile
@@ -278,7 +286,7 @@ function watchFiles() {
  */
 
 
-const build = gulp.series(clean, gulp.parallel(jade, html, css, images, fonts, js));
+const build = gulp.series(clean, gulp.parallel(jade, html, css, images, fonts, js, scss));
 const watch = gulp.parallel(watchFiles, browser_sync);
 
 exports.css = css;
@@ -286,8 +294,9 @@ exports.images = images;
 exports.clean = clean;
 exports.jade = jade;
 exports.html = html;
-exports.fonts = fonts;
 exports.js = js;
+exports.fonts = fonts;
+exports.scss = scss;
 exports.build = build;
 exports.watch = watch;
 exports.default = build;
