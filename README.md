@@ -1,21 +1,19 @@
 ## Pug-Sass Starter project.
 This is a Pug and Sass starter project using gulp for task automation.
 
-<<<<<<< HEAD
 ### 1. GitHub repositor
 
-Repository: [https://ghe.oro-g2d.com/vietnam/beautea](https://ghe.oro-g2d.com/vietnam/beautea)
->>>>>>> bcc49e0a4e213ff50bfc800fbb62cc13d2555af8
+Repository: [https://github.com/trucnc1901/gulp_starter/](https://github.com/trucnc1901/gulp_starter/)
 
 ### 2. install Node.js
 
-Download [Node.js v6.9.1](https://nodejs.org/dist/v6.9.1/node-v6.9.1-x64.msi) and install.
-v6.0.0 or more is required.
+Download [Node.js v10.15.3] and install.
+v10.15.3 or more is required.
 
 Command Prompt (Terminal)  Node
 ```sh
 $ node -v
-v6.9.1
+v10.15.3
 ```
 
 ### 3. Install Node packages
@@ -25,8 +23,14 @@ $ npm install gulp -g
 $ npm install
 ```
 
-### 4. Run Gulp
+### 4. Run gulp for dev
 
 ```sh
-$ gulp
+$ npm run dev
+```
+
+### 5. Run build for Product
+
+```sh
+$ npm run build
 ```
