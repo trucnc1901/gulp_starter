@@ -3,7 +3,6 @@
 
 const gulp = require('gulp');
 const pug = require('gulp-pug'); // Pug template engine
-// const prefix = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create(); // Sync withn browser
 const uglify = require('gulp-uglify'); // Minify javascript
 const saveLicense = require('uglify-save-license');
@@ -24,8 +23,6 @@ const gulpIf = require("gulp-if"); // gulpIf
 // const webpackConfig = require('./webpack.config.js');
 const rollupEach = require('gulp-rollup-each');
 const rollupBuble = require('rollup-plugin-buble');
-// const gulpIgnore = require('gulp-ignore');
-// const data = require('gulp-data');
 
 const CONFIG = {
   path: require('./configs/path-env.js'),
@@ -180,7 +177,9 @@ function css() {
       return path;
     }))
     // Parse with PostCSS pluginss.
-    .pipe(gulpIf('!**/vendor/**', postcss([autoprefixer(optionCSS), cssnano({colormin: false})])))
+    .pipe(gulpIf('!**/vendor/**', postcss([autoprefixer(optionCSS), cssnano({
+      colormin: false
+    })])))
     // Create sourcemap.
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(CONFIG.path.dist))
@@ -213,7 +212,7 @@ function js() {
       external: ['jquery'],
       onwarn: function (message) {
         if (/The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten./.test(message)) {
-            return;
+          return;
         }
         // console.error(message);
       },
